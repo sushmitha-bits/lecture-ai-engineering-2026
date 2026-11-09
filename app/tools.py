@@ -29,10 +29,11 @@ def _names(entry: dict) -> list[str]:
 
 
 def search_glossary(query: str) -> str:
-    """講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
+    """講座の用語集から1つの用語を検索し、定義と扱う回を返す。
 
-    AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
-    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+    AIエンジニアリングの用語やAIE2026固有の言葉について説明する前に使う。
+    query には調べたい用語を1つ指定する（例: "LoRA"）。
+    複数の用語を比較するときは、用語ごとにこのツールを呼び出す。
     """
     q = _normalize(query)
     if not q:
@@ -68,9 +69,10 @@ def search_glossary(query: str) -> str:
 
 
 def get_lecture_summary(lecture: int) -> str:
-    """指定した回（1始まりの整数）の講義の要点を返す。
+    """指定した講義の回の要点を返す。
 
-    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
+    講義の内容や要点、回どうしの関係を聞かれたときに使う。
+    lecture には回の番号を1始まりの整数で指定する（例: 第3回なら 3）。
     """
     path = DATA_DIR / "lectures" / f"{lecture:02d}.md"
     if not path.exists():
