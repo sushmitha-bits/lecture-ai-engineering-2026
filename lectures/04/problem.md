@@ -89,7 +89,7 @@ uv run python -m app.judge --compare lectures/04/reference/labels_instructor.jso
 uv run python -m app.judge
 ```
 
-10 件 × 1 回ずつ LLM を呼びます（1 分ほど）。採点のプロンプトは `data/eval/rubric.md` にあり、全文読めます。`app/judge.py` は、基準ごとに理由を先に書かせてから T / F / unsure を出させる構造化出力で、temperature は 0 です。
+10 件 × 1 回ずつ LLM を呼びます（1 分ほど）。採点のプロンプトは `data/eval/rubric.md` にあり、全文読めます。`app/judge.py` は、基準ごとに T / F / unsure を先に決めてから理由を書かせる構造化出力で、temperature は 0 です。
 
 出力の読み方：
 
@@ -165,7 +165,7 @@ git push -u origin lec04
 
 - 採点のモデル：`AIE_MODEL=gemini-3.5-flash uv run python -m app.judge` のように切り替えます（無料枠のレート制限はモデルごとに違います）
 - `rubric.md` の文言：基準の書き方を変えます（例：「簡潔」の意味を文字数や段落数で具体的に書く）
-- 判定の順序：`app/judge.py` の `CriterionVerdict` で `reason` と `verdict` の順を入れ替えます。理由を先に書かせるかどうかで、判定が変わるかを見ます
+- 判定の順序：`app/judge.py` の `CriterionVerdict` で `verdict` と `reason` の順を入れ替えます。判定を先に決めさせるかどうかで、判定が変わるかを見ます
 
 ### 実装の進め方
 
